@@ -30,6 +30,39 @@ extension ListSection: SectionModelType {
 
 final class CoinListViewController: UIViewController {
     
+    private let buttonView = {
+        let view = UIView()
+        return view
+    }()
+    
+    private let allButton = {
+        let bt = CustomSortingButton()
+        bt.setTitle("  All  ", for: .normal)
+        return bt
+    }()
+    
+    private let krButton = {
+        let bt = CustomSortingButton()
+        bt.setTitle("  KRW  ", for: .normal)
+        return bt
+    }()
+    
+    private let btcButton = {
+        let bt = CustomSortingButton()
+        bt.setTitle("  BTC  ", for: .normal)
+        return bt
+    }()
+    
+    private let stackView = {
+        let view = UIStackView()
+        view.backgroundColor = .blue
+        view.spacing = 10
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .fillEqually
+        return view
+    }()
+    
     private lazy var tableView = {
         let view = UITableView()
         view.rowHeight = 40
@@ -77,10 +110,43 @@ final class CoinListViewController: UIViewController {
     
     
     private func setUI() {
-        view.addSubview(tableView)
+        [buttonView, stackView, tableView].forEach {
+            view.addSubview($0)
+        }
+        
+        [allButton, krButton, btcButton].forEach {
+            stackView.addSubview($0)
+        }
+        
+        buttonView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(44)
+        }
+        
+        stackView.snp.makeConstraints { make in
+            make.height.equalTo(buttonView).multipliedBy(0.8)
+            make.centerY.equalTo(buttonView)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        allButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+        
+        krButton.snp.makeConstraints { make in
+            make.leading.equalTo(allButton.snp.trailing).offset(10)
+            make.height.equalToSuperview()
+        }
+        
+        btcButton.snp.makeConstraints { make in
+            make.leading.equalTo(krButton.snp.trailing).offset(10)
+            make.height.equalToSuperview()
+        }
         
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(buttonView.snp.bottom)
         }
         
     }
