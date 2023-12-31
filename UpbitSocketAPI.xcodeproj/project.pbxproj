@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		803516B62B413A9200EEEAF5 /* CoinListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803516B52B413A9200EEEAF5 /* CoinListCell.swift */; };
+		803516BA2B413A9B00EEEAF5 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803516B82B413A9B00EEEAF5 /* ReusableProtocol.swift */; };
+		803516BB2B413A9B00EEEAF5 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803516B92B413A9B00EEEAF5 /* ViewModelType.swift */; };
+		803516BF2B413AA300EEEAF5 /* CoinListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803516BD2B413AA300EEEAF5 /* CoinListViewModel.swift */; };
+		803516C02B413AA300EEEAF5 /* CoinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803516BE2B413AA300EEEAF5 /* CoinListViewController.swift */; };
+		803516C22B413AD900EEEAF5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803516C12B413AD900EEEAF5 /* APIManager.swift */; };
 		80CEAD922B3B191600EEE4B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CEAD912B3B191600EEE4B9 /* AppDelegate.swift */; };
 		80CEAD942B3B191600EEE4B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CEAD932B3B191600EEE4B9 /* SceneDelegate.swift */; };
 		80CEAD962B3B191600EEE4B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CEAD952B3B191600EEE4B9 /* ViewController.swift */; };
@@ -42,6 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		803516B52B413A9200EEEAF5 /* CoinListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinListCell.swift; sourceTree = "<group>"; };
+		803516B82B413A9B00EEEAF5 /* ReusableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
+		803516B92B413A9B00EEEAF5 /* ViewModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		803516BD2B413AA300EEEAF5 /* CoinListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinListViewModel.swift; sourceTree = "<group>"; };
+		803516BE2B413AA300EEEAF5 /* CoinListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinListViewController.swift; sourceTree = "<group>"; };
+		803516C12B413AD900EEEAF5 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		80CEAD8E2B3B191600EEE4B9 /* UpbitSocketAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UpbitSocketAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80CEAD912B3B191600EEE4B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		80CEAD932B3B191600EEE4B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +100,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		803516B42B413A9200EEEAF5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				803516B52B413A9200EEEAF5 /* CoinListCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		803516B72B413A9B00EEEAF5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				803516B82B413A9B00EEEAF5 /* ReusableProtocol.swift */,
+				803516B92B413A9B00EEEAF5 /* ViewModelType.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		803516BC2B413AA300EEEAF5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				803516BD2B413AA300EEEAF5 /* CoinListViewModel.swift */,
+				803516BE2B413AA300EEEAF5 /* CoinListViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		80CEAD852B3B191600EEE4B9 = {
 			isa = PBXGroup;
 			children = (
@@ -111,16 +149,20 @@
 		80CEAD902B3B191600EEE4B9 /* UpbitSocketAPI */ = {
 			isa = PBXGroup;
 			children = (
+				803516C12B413AD900EEEAF5 /* APIManager.swift */,
 				80CEAD912B3B191600EEE4B9 /* AppDelegate.swift */,
-				80CEAD932B3B191600EEE4B9 /* SceneDelegate.swift */,
-				80CEAD952B3B191600EEE4B9 /* ViewController.swift */,
-				80CEADD82B3C7D8500EEE4B9 /* WebSocketManager.swift */,
-				80CEADDF2B3C80D300EEE4B9 /* Model.swift */,
-				80CEADE12B3C947400EEE4B9 /* SocketViewModel.swift */,
-				80CEAD972B3B191600EEE4B9 /* Main.storyboard */,
 				80CEAD9A2B3B191800EEE4B9 /* Assets.xcassets */,
-				80CEAD9C2B3B191800EEE4B9 /* LaunchScreen.storyboard */,
+				803516B42B413A9200EEEAF5 /* Cells */,
 				80CEAD9F2B3B191800EEE4B9 /* Info.plist */,
+				80CEAD9C2B3B191800EEE4B9 /* LaunchScreen.storyboard */,
+				80CEAD972B3B191600EEE4B9 /* Main.storyboard */,
+				80CEADDF2B3C80D300EEE4B9 /* Model.swift */,
+				803516B72B413A9B00EEEAF5 /* Protocols */,
+				80CEAD932B3B191600EEE4B9 /* SceneDelegate.swift */,
+				80CEADE12B3C947400EEE4B9 /* SocketViewModel.swift */,
+				80CEAD952B3B191600EEE4B9 /* ViewController.swift */,
+				803516BC2B413AA300EEEAF5 /* Views */,
+				80CEADD82B3C7D8500EEE4B9 /* WebSocketManager.swift */,
 			);
 			path = UpbitSocketAPI;
 			sourceTree = "<group>";
@@ -282,12 +324,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				803516C22B413AD900EEEAF5 /* APIManager.swift in Sources */,
 				80CEADE02B3C80D300EEE4B9 /* Model.swift in Sources */,
+				803516B62B413A9200EEEAF5 /* CoinListCell.swift in Sources */,
 				80CEADE22B3C947400EEE4B9 /* SocketViewModel.swift in Sources */,
 				80CEAD962B3B191600EEE4B9 /* ViewController.swift in Sources */,
+				803516C02B413AA300EEEAF5 /* CoinListViewController.swift in Sources */,
 				80CEAD922B3B191600EEE4B9 /* AppDelegate.swift in Sources */,
 				80CEAD942B3B191600EEE4B9 /* SceneDelegate.swift in Sources */,
+				803516BA2B413A9B00EEEAF5 /* ReusableProtocol.swift in Sources */,
 				80CEADD92B3C7D8500EEE4B9 /* WebSocketManager.swift in Sources */,
+				803516BB2B413A9B00EEEAF5 /* ViewModelType.swift in Sources */,
+				803516BF2B413AA300EEEAF5 /* CoinListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

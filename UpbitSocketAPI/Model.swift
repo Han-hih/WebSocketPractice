@@ -16,5 +16,15 @@ struct TickerModel: Decodable {
         case streamType = "stream_type"
         case tradePrice = "trade_price"
     }
-    
 }
+
+struct UpbitList: Decodable {
+    let market, koreanName, englishName: String
+
+        enum CodingKeys: String, CodingKey {
+            case market
+            case koreanName = "korean_name"
+            case englishName = "english_name"
+        }
+}
+typealias Upbit = [UpbitList]
