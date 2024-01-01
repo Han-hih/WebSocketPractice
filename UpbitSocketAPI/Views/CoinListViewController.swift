@@ -55,8 +55,6 @@ final class CoinListViewController: UIViewController {
     
     private let stackView = {
         let view = UIStackView()
-        view.backgroundColor = .blue
-        view.spacing = 10
         view.axis = .horizontal
         view.alignment = .fill
         view.distribution = .fillEqually
@@ -87,25 +85,88 @@ final class CoinListViewController: UIViewController {
     }
     
     private func bind() {
-        let input = CoinListViewModel.Input(networkResult: coinTrigger.asObservable())
+        let input = CoinListViewModel.Input(
+            networkResult: coinTrigger.asObservable(),
+            krwButtonTapped: krButton.rx.tap.asObservable(),
+            btcButtonTapped: btcButton.rx.tap.asObservable(),
+            allButtonTapped: allButton.rx.tap.asObservable()
+        )
         
         let output = viewModel.transform(input: input)
         
-        output.coinList.observe(on: MainScheduler.asyncInstance).bind { result in
-            let items = result.map { UpbitList(market: $0.market, koreanName: $0.koreanName, englishName: $0.englishName)}
-            var coinSection = BehaviorSubject(value: [ListSection(items: items)])
-            
-            let dataSource = RxTableViewSectionedReloadDataSource<ListSection> { dataSource, tableView, indexPath, item in
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: CoinListCell.identifier, for: indexPath) as? CoinListCell else { return UITableViewCell() }
-                cell.selectionStyle = .none
-                cell.configure(like: false, name: item.koreanName, code: item.market)
-                return cell
-            }
-            
-            coinSection.bind(to: self.tableView.rx.items(dataSource: dataSource))
-                .disposed(by: self.disposeBag)
-        }
-        .disposed(by: disposeBag)
+        output.coinList
+            .observe(on: MainScheduler.asyncInstance)
+            .bind { result in
+                let items = result.map { UpbitList(market: $0.market, koreanName: $0.koreanName, englishName: $0.englishName)}
+                let coinSection = BehaviorSubject(value: [ListSection(items: items)])
+                
+                let dataSource = RxTableViewSectionedReloadDataSource<ListSection> { dataSource, tableView, indexPath, item in
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: CoinListCell.identifier, for: indexPath) as? CoinListCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    cell.configure(like: false, name: item.koreanName, code: item.market)
+                    return cell
+                }
+                coinSection.bind(to: self.tableView.rx.items(dataSource: dataSource))
+                    .disposed(by: self.disposeBag)
+            }.disposed(by: disposeBag)
+        
+        output.krwCoinList
+            .observe(on: MainScheduler.asyncInstance)
+            .bind { result in
+                self.tableView.delegate = nil
+                self.tableView.dataSource = nil
+                
+                let items = result.map { UpbitList(market: $0.market, koreanName: $0.koreanName, englishName: $0.englishName)}
+                let coinSection = BehaviorSubject(value: [ListSection(items: items)])
+                
+                let dataSource = RxTableViewSectionedReloadDataSource<ListSection> { dataSource, tableView, indexPath, item in
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: CoinListCell.identifier, for: indexPath) as? CoinListCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    cell.configure(like: false, name: item.koreanName, code: item.market)
+                    return cell
+                }
+                coinSection.bind(to: self.tableView.rx.items(dataSource: dataSource))
+                    .disposed(by: self.disposeBag)
+        }.disposed(by: disposeBag)
+        
+        output.btcCoinList
+            .observe(on: MainScheduler.asyncInstance)
+            .bind { result in
+                self.tableView.delegate = nil
+                self.tableView.dataSource = nil
+                
+                let items = result.map { UpbitList(market: $0.market, koreanName: $0.koreanName, englishName: $0.englishName)}
+                let coinSection = BehaviorSubject(value: [ListSection(items: items)])
+                
+                let dataSource = RxTableViewSectionedReloadDataSource<ListSection> { dataSource, tableView, indexPath, item in
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: CoinListCell.identifier, for: indexPath) as? CoinListCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    cell.configure(like: false, name: item.koreanName, code: item.market)
+                    return cell
+                }
+                coinSection.bind(to: self.tableView.rx.items(dataSource: dataSource))
+                    .disposed(by: self.disposeBag)
+        }.disposed(by: disposeBag)
+        
+        output.allCoinList
+            .observe(on: MainScheduler.asyncInstance)
+            .bind { result in
+                self.tableView.delegate = nil
+                self.tableView.dataSource = nil
+                
+                let items = result.map { UpbitList(market: $0.market, koreanName: $0.koreanName, englishName: $0.englishName)}
+                let coinSection = BehaviorSubject(value: [ListSection(items: items)])
+                
+                let dataSource = RxTableViewSectionedReloadDataSource<ListSection> { dataSource, tableView, indexPath, item in
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: CoinListCell.identifier, for: indexPath) as? CoinListCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    cell.configure(like: false, name: item.koreanName, code: item.market)
+                    return cell
+                }
+                coinSection.bind(to: self.tableView.rx.items(dataSource: dataSource))
+                    .disposed(by: self.disposeBag)
+        }.disposed(by: disposeBag)
+        
     }
     
     
@@ -127,6 +188,7 @@ final class CoinListViewController: UIViewController {
             make.height.equalTo(buttonView).multipliedBy(0.8)
             make.centerY.equalTo(buttonView)
             make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview()
         }
         
         allButton.snp.makeConstraints { make in
