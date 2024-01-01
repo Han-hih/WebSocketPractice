@@ -34,25 +34,20 @@ class CoinListViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         
-        let upbitList = input.networkResult
-            .flatMapLatest { [unowned self] _ -> Observable<[UpbitList]> in
-                return APIManager.shared.getAPIRequest(type: [UpbitList].self, url: url).map { $0 }
-            }
+        let upbitList = transCoinList { _ in true }
         
-        let krwCoinList = input.krwButtonTapped
-            .flatMapLatest { [unowned self] _ -> Observable<[UpbitList]> in
-                return APIManager.shared.getAPIRequest(type: [UpbitList].self, url: self.url).map { $0.filter { $0.market.contains("KRW") } }
-            }
+        let krwCoinList = transCoinList { $0.market.contains("KRW") }
         
-        let btcCoinList = input.btcButtonTapped
-            .flatMapLatest { [unowned self] _ -> Observable<[UpbitList]> in
-                return APIManager.shared.getAPIRequest(type: [UpbitList].self, url: self.url).map { $0.filter { $0.market.contains("BTC-") } }
-            }
+        let btcCoinList = transCoinList { $0.market.contains("BTC-") }
         
-        let allCoinList = input.allButtonTapped
-            .flatMapLatest { [unowned self] _ -> Observable<[UpbitList]> in
-                return APIManager.shared.getAPIRequest(type: [UpbitList].self, url: self.url).map { $0 }
-            }
+        let allCoinList = transCoinList { _ in true }
+        
+        func transCoinList(filter: @escaping (UpbitList) -> Bool) -> Observable<[UpbitList]> {
+            return input.networkResult
+                .flatMapLatest { [unowned self] _ -> Observable<[UpbitList]> in
+                    return APIManager.shared.getAPIRequest(type: [UpbitList].self, url: url).map { $0.filter(filter) }
+                }
+        }
         
         return Output(
             coinList: upbitList,
